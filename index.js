@@ -15,7 +15,7 @@ async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       const contactList = await listContacts();
-      return console.log(contactList);
+      return console.table(contactList);
 
     case "get":
       const result = await getContactById(id);
