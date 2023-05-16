@@ -3,14 +3,6 @@ const path = require("path");
 const { nanoid } = require("nanoid");
 
 const contactsPath = path.join(__dirname, "db", "contacts.json");
-// console.log(contactsPath);
-
-// const x = 5;
-// console.log(x);
-
-// node contacts
-
-// TODO: задокументувати кожну функцію
 
 // get array of ALL contacts
 async function listContacts() {
@@ -20,15 +12,17 @@ async function listContacts() {
 
 // get one contact by id
 async function getContactById(contactId) {
+  const id = String(contactId);
   const contacts = await listContacts();
-  const selectedContact = contacts.find((cont) => cont.id === contactId);
+  const selectedContact = contacts.find((cont) => cont.id === id);
   return selectedContact || null;
 }
 
 // remove one contact by id from contacts.json
 async function removeContact(contactId) {
+  const id = String(contactId);
   const contacts = await listContacts();
-  const index = contacts.findIndex((cont) => cont.id === contactId);
+  const index = contacts.findIndex((cont) => cont.id === id);
   if (index === -1) {
     return null;
   }
@@ -37,18 +31,6 @@ async function removeContact(contactId) {
   await fs.writeFile(contactsPath, newFileContent);
   return result;
 }
-
-// async function removeContact(contactId) {
-//     const contacts = await listContacts();
-//     const newContacts = contacts.filter(cont => !(cont.id === contactId));
-
-//     if (contacts.length === newContacts.length) {
-//       return null;
-//     }
-//     const newFileContent = JSON.stringify(newContacts, null, 2);
-//     await fs.writeFile(contactsPath, newFileContent);
-//     return newContacts;
-//   }
 
 // add contact to contacts.json
 async function addContact(name, email, phone) {
@@ -63,7 +45,6 @@ async function addContact(name, email, phone) {
   const newFileContent = JSON.stringify(newContacts, null, 2);
   await fs.writeFile(contactsPath, newFileContent);
   return newContacts;
-//   return createdContact;
 }
 
 module.exports = {
@@ -72,11 +53,3 @@ module.exports = {
   removeContact,
   addContact,
 };
-
-// node contacts
-// listContacts();
-
-// removeContact("AeHIrLTr6JkxGE6SN-0Rw");
-// getContactById("AeHIrLTr6JkxGE6SN-0Rw");
-
-// addContact('Vasia', 'vasia@gmail.com', '62626622626');

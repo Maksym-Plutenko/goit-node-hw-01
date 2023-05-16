@@ -1,8 +1,6 @@
 const yargs = require("yargs");
 const { hideBin } = require("yargs/helpers");
 
-// console.log(hideBin);
-
 const {
   listContacts,
   getContactById,
@@ -13,9 +11,6 @@ const {
 const arr = hideBin(process.argv);
 const { argv } = yargs(arr);
 
-// console.log(argv);
-
-// TODO: рефакторить
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
@@ -44,5 +39,3 @@ async function invokeAction({ action, id, name, email, phone }) {
 }
 
 invokeAction(argv);
-
-// console.log("Hello!!!!")
